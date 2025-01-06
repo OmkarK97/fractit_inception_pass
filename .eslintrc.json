@@ -1,0 +1,8 @@
+{
+  "extends": "next/core-web-vitals",
+  "rules": {
+    "rule-name": "off", // Replace "rule-name" with the specific rule(s) to disable
+    "react-hooks/exhaustive-deps": "off"
+  }
+}
+
