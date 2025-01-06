@@ -1,9 +1,8 @@
-'use client'
-
-import React from "react";
+import React from 'react';
 import Image from "next/image";
-import { useAppContext } from "../contexts/AppContext";
-import { Progress } from "@/components/ui/progress";
+import { useAppContext } from '../contexts/AppContext';
+import MintingSection from './MintingSection';
+import '../app/App.css'
 
 const Hero: React.FC = () => {
   const { NFTData, totalNFT } = useAppContext();
@@ -13,52 +12,39 @@ const Hero: React.FC = () => {
   const percentage = (cappedValue / max) * 100;
 
   return (
-    <div className="grid lg:grid-cols-2 gap-8 items-center">
-      <div className="space-y-6">
+    <div className="flex flex-col md:flex-row justify-between items-start">
+      <div className="w-full md:w-2/3 space-y-6">
         <div className="space-y-2">
-          <h1 className="bg-gradient-to-r from-[#2253FF] to-[#4768df] bg-clip-text text-transparent text-4xl lg:text-5xl font-bold">
+          <h1 className="puneor text-[#2253FF] text-[30px] md:text-[45px] font-medium md:leading-[52px]">
             Fractit Club
           </h1>
-          <h2 className="text-4xl lg:text-5xl font-bold text-white">
+          <h2 className="puneor text-[30px] md:text-[45px] font-medium md:leading-[52px]">
             Inception Pass
           </h2>
         </div>
-        
-        <p className="text-gray-300 text-lg leading-relaxed max-w-xl">
-          Collect the exclusive Fractit Club Inception Pass and become part of
-          Fractit&apos;s elite OGs. Unlock premium access to global properties,
-          priority bookings, reduced fees, and exclusive rewards. This is your
-          gateway to unmatched real estate and lifestyle perks.
+        <p className="md:w-[550px] font-light text-gray-300">
+          Collect the exclusive Fractit Club Inception Pass and become part of Fractit&apos;s elite OGs. 
+          Unlock premium access to global properties, priority bookings, reduced fees, and exclusive rewards. 
+          This is your gateway to unmatched real estate and lifestyle perks.
         </p>
-        
-        <div className="space-y-4 bg-white/5 rounded-2xl p-6 backdrop-blur-sm">
-          <Progress value={percentage} className="h-2 bg-slate-600"  />
-          <div className="flex justify-between text-sm text-gray-300">
-            <div className="flex items-center gap-2">
-              <div className="h-2 w-2 rounded-full bg-[#2253FF]" />
-              <span>
-                You Own:{" "}
-                {Number(NFTData) <= 1 ? `${NFTData} PASS` : `${NFTData} PASSES`}
-              </span>
+        <div className="w-full md:w-[550px]">
+          <div className="w-full bg-white/20 rounded-full h-4">
+            <div
+              className="bg-[#2253FF] h-4 rounded-full transition-all"
+              style={{ width: `${percentage}%` }}
+            />
+          </div>
+          <div className="text-center mt-2 text-sm font-medium flex flex-row justify-between text-gray-300">
+            <div>
+              You Own: {Number(NFTData) <= 1 ? `${NFTData} PASS` : `${NFTData} PASSES`}
             </div>
-            <div className="flex items-center gap-2">
-              <div className="h-2 w-2 rounded-full bg-white/20" />
-              <span>{totalNFT} Minted/10K</span>
-            </div>
+            <div>{totalNFT} Minted/10K</div>
           </div>
         </div>
+        <MintingSection />
       </div>
-
-      <div className="relative aspect-square w-full max-w-md mx-auto lg:ml-auto">
-        <div className="absolute inset-0 bg-[#2253FF]/20 blur-[100px] rounded-full" />
-        <Image
-          src="/assets/mainimg.png"
-          alt="Fractit Club Inception Pass"
-          width={500}
-          height={500}
-          className="relative z-10"
-          priority
-        />
+      <div className="w-full md:w-1/3 flex justify-center md:justify-end md:items-start order-first md:order-last mb-6 md:mb-0">
+        <Image src="/assets/mainimg.png" alt="Fractit Club Inception Pass" width={500} height={500} />
       </div>
     </div>
   );

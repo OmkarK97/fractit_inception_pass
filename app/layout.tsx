@@ -1,8 +1,7 @@
 "use client";
-import type { Metadata } from "next";
+
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { cn } from "../lib/utils";
 import { AbstraxionProvider } from "@burnt-labs/abstraxion";
 
 import "@burnt-labs/abstraxion/dist/index.css";

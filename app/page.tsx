@@ -1,10 +1,9 @@
-'use client'
+"use client";
 
-import React from 'react';
-import { AppProvider } from '../contexts/AppContext';
-import Navbar from '../components/Navbar';
-import Hero from '../components/Hero';
-import MintingSection from '../components/MintingSection';
+import React from "react";
+import { AppProvider } from "../contexts/AppContext";
+import Navbar from "../components/Navbar";
+import Hero from "../components/Hero";
 
 export default function Home() {
   return (
@@ -19,12 +18,10 @@ export default function Home() {
         {/* Content */}
         <div className="relative z-10">
           <Navbar />
-          <main className="container mx-auto px-4 py-8 lg:py-12">
+          <main className="container mx-auto px-2 py-4 lg:py-8">
             <div className="bg-black/40 backdrop-blur-xl rounded-3xl border border-white/5 shadow-2xl">
-              <div className="p-4 md:p-8 lg:p-12 space-y-12">
+              <div className="flex flex-col p-4 md:p-8 lg:p-12 space-y-12">
                 <Hero />
-                <div className="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-                <MintingSection />
               </div>
             </div>
           </main>
