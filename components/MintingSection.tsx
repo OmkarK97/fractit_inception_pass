@@ -276,7 +276,7 @@ const MintingSection: React.FC = () => {
             <span>MINTING...</span>
           </div>
         ) : (
-          <div>{parseInt(NFTData) > 0 ? "MINT AGAIN" : "MINT NOW"}</div>
+          <div className="text-white">{parseInt(NFTData) > 0 ? "MINT AGAIN" : "MINT NOW"}</div>
         )}
       </Button>
 

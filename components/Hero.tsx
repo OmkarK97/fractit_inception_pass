@@ -33,7 +33,7 @@ const Hero: React.FC = () => {
             <h1 className="puneor text-[#2253FF] text-[30px] md:text-[45px] font-medium md:leading-[52px]">
               Fractit Club
             </h1>
-            <h2 className="puneor text-[30px] md:text-[45px] font-medium md:leading-[52px]">
+            <h2 className="puneor text-white text-[30px] md:text-[45px] font-medium md:leading-[52px]">
               Inception Pass
             </h2>
           </div>
