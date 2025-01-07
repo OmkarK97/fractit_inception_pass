@@ -3,12 +3,17 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { useAppContext } from "../contexts/AppContext";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { useAbstraxionSigningClient } from "@burnt-labs/abstraxion";
 import { coins } from "@cosmjs/proto-signing";
 import { toast } from "react-toastify";
-import { Loader2 } from 'lucide-react';
+import { Loader2 } from "lucide-react";
 import rej from "@/app/assets/images/TxnError.gif";
 import conf from "@/app/assets/images/Loader 2 Fractit.gif";
 import tick from "@/app/assets/images/done.gif";
@@ -34,8 +39,8 @@ const PaymentOption = ({
     onClick={onClick}
     disabled={disabled}
     className={`w-full p-4 rounded-2xl border transition-all duration-200 ${
-      disabled 
-        ? "border-gray-800 bg-black/20 opacity-50 cursor-not-allowed" 
+      disabled
+        ? "border-gray-800 bg-black/20 opacity-50 cursor-not-allowed"
         : selected
         ? "border-[#2253FF] bg-[#2253FF]/10"
         : "border-gray-700 bg-black/40 hover:border-gray-600"
@@ -56,7 +61,8 @@ const PaymentOption = ({
           {cost} {token}
         </p>
         <p className={`text-sm ${disabled ? "text-red-400" : "text-gray-300"}`}>
-          {balance ? parseFloat(balance.toString()).toFixed(3) : '0.000'} {token}
+          {balance ? parseFloat(balance.toString()).toFixed(3) : "0.000"}{" "}
+          {token}
         </p>
       </div>
     </div>
@@ -201,11 +207,12 @@ const MintingSection: React.FC = () => {
     setIsError(false);
   };
 
-  const canMint = isConnected && 
-                  twitterShare && 
-                  instaShare && 
-                  !isLoading && 
-                  (hasXionBalance || hasUsdcBalance);
+  const canMint =
+    isConnected &&
+    twitterShare &&
+    instaShare &&
+    !isLoading &&
+    (hasXionBalance || hasUsdcBalance);
 
   return (
     <div className="space-y-6 md:w-[550px]">
@@ -243,7 +250,7 @@ const MintingSection: React.FC = () => {
       </div>
 
       <div className="font-light text-[#2253FF]">
-        FOLLOW US ON SOCIALS TO MINT
+        FOLLOW OUR SOCIALS TO MINT
       </div>
 
       <div className="space-y-3 w-full">
@@ -276,7 +283,9 @@ const MintingSection: React.FC = () => {
             <span>MINTING...</span>
           </div>
         ) : (
-          <div className="text-white">{parseInt(NFTData) > 0 ? "MINT AGAIN" : "MINT NOW"}</div>
+          <div className="text-white">
+            {parseInt(NFTData) > 0 ? "MINT AGAIN" : "MINT NOW"}
+          </div>
         )}
       </Button>
 
@@ -360,4 +369,3 @@ const MintingSection: React.FC = () => {
 };
 
 export default MintingSection;
-

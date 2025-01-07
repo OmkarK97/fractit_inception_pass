@@ -1,34 +1,32 @@
-import React from 'react';
+import React from "react";
 import Image from "next/image";
-import { useAppContext } from '../contexts/AppContext';
-import MintingSection from './MintingSection';
-import '../app/App.css'
+import { useAppContext } from "../contexts/AppContext";
+import MintingSection from "./MintingSection";
+import "../app/App.css";
 
 const Hero: React.FC = () => {
   const { NFTData, totalNFT } = useAppContext();
-
 
   const max = 10000;
   const cappedValue = Number(totalNFT);
   const percentage = (cappedValue / max) * 100;
 
   return (
-    <div className="flex flex-col md:flex-row justify-between items-start relative h-[calc(100vh-120px)]">
-      {/* Fixed image container */}
-      <div className="w-full md:w-1/3 flex justify-center md:justify-end md:items-start order-first md:order-last mb-6 md:mb-0 md:fixed md:right-12 md:top-32">
-        <Image 
-          src="/assets/mainimg.png" 
-          alt="Fractit Club Inception Pass" 
-          width={500} 
+    <div className="flex flex-col md:flex-row justify-between items-start relative md:h-[calc(100vh-120px)]">
+      {/* Image container */}
+      <div className="w-full md:w-1/3 flex justify-center md:justify-end md:items-start order-first md:order-last mb-6 md:mb-0 md:sticky md:top-32">
+        <Image
+          src="/assets/mainimg.png"
+          alt="Fractit Club Inception Pass"
+          width={500}
           height={500}
-          className="sticky top-0"
         />
       </div>
-      
-      {/* Scrollable content container with fixed header */}
-      <div className="w-full md:w-2/3 flex flex-col h-full overflow-y-auto no-scrollbar">
-        {/* Fixed header section */}
-        <div className="p-6 top-0 z-10">
+
+      {/* Scrollable content container */}
+      <div className="w-full md:w-2/3 flex flex-col md:h-full md:overflow-y-auto md:no-scrollbar">
+        {/* Header section */}
+        <div className="p-6 md:top-0 z-10">
           <div className="space-y-2">
             <h1 className="puneor text-[#2253FF] text-[30px] md:text-[45px] font-medium md:leading-[52px]">
               Fractit Club
@@ -38,8 +36,9 @@ const Hero: React.FC = () => {
             </h2>
           </div>
           <p className="md:w-[550px] font-light text-gray-300 mt-4">
-            Collect the exclusive Fractit Club Inception Pass and become part of Fractit&apos;s elite OGs. 
-            Unlock premium access to global properties, priority bookings, reduced fees, and exclusive rewards. 
+            Collect the exclusive Fractit Club Inception Pass and become part of
+            Fractit&apos;s elite OGs. Unlock premium access to global
+            properties, priority bookings, reduced fees, and exclusive rewards.
             This is your gateway to unmatched real estate and lifestyle perks.
           </p>
           <div className="w-full md:w-[550px] mt-6">
@@ -51,16 +50,17 @@ const Hero: React.FC = () => {
             </div>
             <div className="text-center mt-2 text-sm font-medium flex flex-row justify-between text-gray-300">
               <div>
-                You Own: {Number(NFTData) <= 1 ? `${NFTData} PASS` : `${NFTData} PASSES`}
+                You Own:{" "}
+                {Number(NFTData) <= 1 ? `${NFTData} PASS` : `${NFTData} PASSES`}
               </div>
               <div>{totalNFT} Minted/10K</div>
             </div>
           </div>
         </div>
 
-        {/* Scrollable content section */}
-          <div className="p-6">
-            <MintingSection />
+        {/* Content section */}
+        <div className="p-6">
+          <MintingSection />
         </div>
       </div>
     </div>
@@ -68,4 +68,3 @@ const Hero: React.FC = () => {
 };
 
 export default Hero;
-
