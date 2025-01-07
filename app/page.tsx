@@ -8,7 +8,7 @@ import Hero from "../components/Hero";
 export default function Home() {
   return (
     <AppProvider>
-      <div className="min-h-screen bg-[#121212] relative overflow-hidden">
+      <div className="h-screen bg-[#121212] relative overflow-auto no-scrollbar">
         {/* Background gradients */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute -top-[40%] -left-[20%] w-[800px] h-[800px] bg-[#2253FF]/10 rounded-full blur-[120px]" />

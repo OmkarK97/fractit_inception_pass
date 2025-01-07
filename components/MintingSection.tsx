@@ -3,24 +3,70 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { useAppContext } from "../contexts/AppContext";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { useAbstraxionSigningClient } from "@burnt-labs/abstraxion";
 import { coins } from "@cosmjs/proto-signing";
 import { toast } from "react-toastify";
-import { Loader2 } from "lucide-react";
+import { Loader2 } from 'lucide-react';
 import rej from "@/app/assets/images/TxnError.gif";
 import conf from "@/app/assets/images/Loader 2 Fractit.gif";
 import tick from "@/app/assets/images/done.gif";
 import twitter from "@/public/assets/twiiter.svg";
 import instagram from "@/public/assets/instagram.svg";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Label } from "@/components/ui/label";
+
+const PaymentOption = ({
+  selected,
+  onClick,
+  token,
+  cost,
+  balance,
+  disabled,
+}: {
+  selected: boolean;
+  onClick: () => void;
+  token: string;
+  cost: string;
+  balance: number | null;
+  disabled: boolean;
+}) => (
+  <button
+    onClick={onClick}
+    disabled={disabled}
+    className={`w-full p-4 rounded-2xl border transition-all duration-200 ${
+      disabled 
+        ? "border-gray-800 bg-black/20 opacity-50 cursor-not-allowed" 
+        : selected
+        ? "border-[#2253FF] bg-[#2253FF]/10"
+        : "border-gray-700 bg-black/40 hover:border-gray-600"
+    }`}
+  >
+    <div className="flex items-center gap-3">
+      <div
+        className={`w-5 h-5 rounded-full border-2 ${
+          selected ? "border-[#2253FF] bg-[#2253FF]" : "border-gray-600"
+        }`}
+      />
+      <div className="flex-1 text-left">
+        <p className="text-gray-300">Mint with {token}</p>
+        <p className="text-sm text-gray-500">Available Funds:</p>
+      </div>
+      <div className="text-right">
+        <p className="text-gray-300">
+          {cost} {token}
+        </p>
+        <p className={`text-sm ${disabled ? "text-red-400" : "text-gray-300"}`}>
+          {balance ? parseFloat(balance.toString()).toFixed(3) : '0.000'} {token}
+        </p>
+      </div>
+    </div>
+    {disabled && (
+      <p className="text-xs text-red-400 text-left mt-2">
+        Insufficient {token} balance
+      </p>
+    )}
+  </button>
+);
 
 const MintingSection: React.FC = () => {
   const {
@@ -41,6 +87,21 @@ const MintingSection: React.FC = () => {
   const [twitterShare, setTwitterShare] = useState(false);
   const [instaShare, setInstaShare] = useState(false);
   const { client } = useAbstraxionSigningClient();
+
+  const XION_COST = 0.05;
+  const USDC_COST = 0.05;
+
+  const hasXionBalance = (xionBalance || 0) >= XION_COST;
+  const hasUsdcBalance = (usdcBalance || 0) >= USDC_COST;
+
+  // Update payment option if current selection becomes invalid
+  useEffect(() => {
+    if (paymentOption === "XION" && !hasXionBalance && hasUsdcBalance) {
+      setPaymentOption("USDC");
+    } else if (paymentOption === "USDC" && !hasUsdcBalance && hasXionBalance) {
+      setPaymentOption("XION");
+    }
+  }, [hasXionBalance, hasUsdcBalance, paymentOption]);
 
   const fixedNft =
     "xion1hy8w7mrvqt9nh8ps7an0r5mqm0dk6vqvfkuje5wwwkmv5hr9x4lqhlnzy6";
@@ -75,6 +136,17 @@ const MintingSection: React.FC = () => {
       toast.error("Wallet not connected");
       return;
     }
+
+    // Additional balance check before proceeding
+    if (paymentOption === "XION" && !hasXionBalance) {
+      toast.error("Insufficient XION balance");
+      return;
+    }
+    if (paymentOption === "USDC" && !hasUsdcBalance) {
+      toast.error("Insufficient USDC balance");
+      return;
+    }
+
     setIsLoading(true);
     setIsError(false);
     setLoadingMessage("Waiting for transaction to confirm..");
@@ -128,8 +200,14 @@ const MintingSection: React.FC = () => {
     setIsError(false);
   };
 
+  const canMint = isConnected && 
+                  twitterShare && 
+                  instaShare && 
+                  !isLoading && 
+                  (hasXionBalance || hasUsdcBalance);
+
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 md:w-[550px]">
       <div className="flex flex-col sm:flex-row gap-4">
         <div className="relative p-[2px] bg-gradient-to-r from-white to-gray-400 rounded-[31px]">
           <a
@@ -167,30 +245,29 @@ const MintingSection: React.FC = () => {
         FOLLOW US ON SOCIALS TO MINT
       </div>
 
-      <RadioGroup
-        defaultValue="XION"
-        onValueChange={(value) => setPaymentOption(value)}
-        className="flex flex-col space-y-2"
-      >
-        <Label className="text-md font-semibold">Select which token you want to use for minting:</Label>
-        <div className="flex items-center space-x-2">
-          <RadioGroupItem value="XION" id="xion" />
-          <Label htmlFor="xion" className="text-gray-300">
-            XION
-          </Label>
-        </div>
-        <div className="flex items-center space-x-2">
-          <RadioGroupItem value="USDC" id="usdc" />
-          <Label htmlFor="usdc" className="text-gray-300">
-            USDC
-          </Label>
-        </div>
-      </RadioGroup>
+      <div className="space-y-3 w-full">
+        <PaymentOption
+          selected={paymentOption === "XION"}
+          onClick={() => setPaymentOption("XION")}
+          token="XION"
+          cost={XION_COST.toString()}
+          balance={xionBalance}
+          disabled={!hasXionBalance}
+        />
+        <PaymentOption
+          selected={paymentOption === "USDC"}
+          onClick={() => setPaymentOption("USDC")}
+          token="USDC"
+          cost={USDC_COST.toString()}
+          balance={usdcBalance}
+          disabled={!hasUsdcBalance}
+        />
+      </div>
 
       <Button
-        className="md:w-[560px] h-12 bg-[#2253FF] hover:bg-[#1a41cc] transition-colors rounded-[31px] mb-5"
+        className="w-full h-12 bg-[#2253FF] hover:bg-[#1a41cc] transition-colors rounded-[31px]"
         onClick={handleApprove}
-        disabled={!isConnected || isLoading || !twitterShare || !instaShare}
+        disabled={!canMint}
       >
         {isLoading ? (
           <div className="flex items-center gap-2">
@@ -201,12 +278,6 @@ const MintingSection: React.FC = () => {
           <div>{parseInt(NFTData) > 0 ? "MINT AGAIN" : "MINT NOW"}</div>
         )}
       </Button>
-
-      <div className="space-y-2 text-sm text-gray-400">
-        <p>Minting Fee: 0.05 {paymentOption}</p>
-        <p>XION Balance: {xionBalance}</p>
-        <p>USDC Balance: {usdcBalance}</p>
-      </div>
 
       <Dialog open={loadingModalVisible} onOpenChange={setLoadingModalVisible}>
         <DialogContent className="sm:max-w-md bg-black/95 border-white/10 text-white">
@@ -288,3 +359,4 @@ const MintingSection: React.FC = () => {
 };
 
 export default MintingSection;
+
