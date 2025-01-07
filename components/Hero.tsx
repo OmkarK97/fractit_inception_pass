@@ -7,6 +7,7 @@ import '../app/App.css'
 const Hero: React.FC = () => {
   const { NFTData, totalNFT } = useAppContext();
 
+
   const max = 10000;
   const cappedValue = Number(totalNFT);
   const percentage = (cappedValue / max) * 100;

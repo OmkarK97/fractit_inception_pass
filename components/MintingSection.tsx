@@ -27,7 +27,7 @@ const PaymentOption = ({
   onClick: () => void;
   token: string;
   cost: string;
-  balance: number | null;
+  balance: string | null;
   disabled: boolean;
 }) => (
   <button
@@ -76,6 +76,7 @@ const MintingSection: React.FC = () => {
     usdcBalance,
     account,
     checkNFTBalance,
+    updateBalancesAndNFT,
   } = useAppContext();
   const [paymentOption, setPaymentOption] = useState("XION");
   const [isLoading, setIsLoading] = useState(false);
@@ -91,8 +92,8 @@ const MintingSection: React.FC = () => {
   const XION_COST = 0.05;
   const USDC_COST = 0.05;
 
-  const hasXionBalance = (xionBalance || 0) >= XION_COST;
-  const hasUsdcBalance = (usdcBalance || 0) >= USDC_COST;
+  const hasXionBalance = Number(xionBalance || 0) >= XION_COST;
+  const hasUsdcBalance = Number(usdcBalance || 0) >= USDC_COST;
 
   // Update payment option if current selection becomes invalid
   useEffect(() => {
@@ -183,7 +184,7 @@ const MintingSection: React.FC = () => {
       setIsSuccess(true);
       setHash(deposit_response.transactionHash);
       setLoadingMessage("Inception Pass Successfully Minted");
-      checkNFTBalance();
+      await updateBalancesAndNFT();
     } catch (error) {
       console.error("Deposit error:", error);
       toast.error(`Deposit failed`);
