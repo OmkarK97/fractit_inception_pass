@@ -53,7 +53,7 @@ const Hero: React.FC = () => {
                 You Own:{" "}
                 {Number(NFTData) <= 1 ? `${NFTData} PASS` : `${NFTData} PASSES`}
               </div>
-              <div>{totalNFT} Minted/10K</div>
+              <div>{totalNFT} Collected/10K</div>
             </div>
           </div>
         </div>

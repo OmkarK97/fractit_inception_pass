@@ -53,7 +53,7 @@ const PaymentOption = ({
         }`}
       />
       <div className="flex-1 text-left">
-        <p className="text-gray-300">Mint with {token}</p>
+        <p className="text-gray-300">Generate with {token}</p>
         <p className="text-sm text-gray-500">Available Funds:</p>
       </div>
       <div className="text-right">
@@ -189,7 +189,7 @@ const MintingSection: React.FC = () => {
 
       setIsSuccess(true);
       setHash(deposit_response.transactionHash);
-      setLoadingMessage("Inception Pass Successfully Minted");
+      setLoadingMessage("Inception Pass Successfully Collected");
       await updateBalancesAndNFT();
     } catch (error) {
       console.error("Deposit error:", error);
@@ -280,11 +280,11 @@ const MintingSection: React.FC = () => {
         {isLoading ? (
           <div className="flex items-center gap-2">
             <Loader2 className="h-4 w-4 animate-spin" />
-            <span>MINTING...</span>
+            <span>GENERATING...</span>
           </div>
         ) : (
           <div className="text-white">
-            {parseInt(NFTData) > 0 ? "MINT AGAIN" : "MINT NOW"}
+            {parseInt(NFTData) > 0 ? "GENERATE AGAIN" : "GENERATE NOW"}
           </div>
         )}
       </Button>
