@@ -35,12 +35,16 @@ const Hero: React.FC = () => {
               Inception Pass
             </h2>
           </div>
-          <p className="md:w-[550px] font-light text-gray-300 mt-4">
-            Collect the exclusive Fractit Club Inception Pass and become part of
-            Fractit&apos;s elite OGs. Unlock premium access to global
-            properties, priority bookings, reduced fees, and exclusive rewards.
-            This is your gateway to unmatched real estate and lifestyle perks.
-          </p>
+            <p className="md:w-[550px] font-light text-gray-300 mt-4">
+              Collect the exclusive Fractit Club Inception Pass and become part
+              of Fractit&apos;s elite OGs. Unlock premium access to global
+              properties, priority bookings, reduced fees, and exclusive
+              rewards. This is your gateway to unmatched real estate and
+              lifestyle perks...
+              <span className="md:w-[550px] font-light text-blue-700 hover:underline hover:text-blue-500 hover:cursor-pointer mt-4">
+                Read More
+              </span>
+            </p>
           <div className="w-full md:w-[550px] mt-6">
             <div className="w-full bg-white/20 rounded-full h-4">
               <div
@@ -53,7 +57,7 @@ const Hero: React.FC = () => {
                 You Own:{" "}
                 {Number(NFTData) <= 1 ? `${NFTData} PASS` : `${NFTData} PASSES`}
               </div>
-              <div>{totalNFT} Collected/10K</div>
+              <div>{totalNFT} Collected/15K</div>
             </div>
           </div>
         </div>
