@@ -53,7 +53,7 @@ const PaymentOption = ({
         }`}
       />
       <div className="flex-1 text-left">
-        <p className="text-gray-300">Generate with {token}</p>
+        <p className="text-gray-300">Claim with {token}</p>
         <p className="text-sm text-gray-500">Available Funds:</p>
       </div>
       <div className="text-right">
@@ -280,11 +280,11 @@ const MintingSection: React.FC = () => {
         {isLoading ? (
           <div className="flex items-center gap-2">
             <Loader2 className="h-4 w-4 animate-spin" />
-            <span>GENERATING...</span>
+            <span>Claiming...</span>
           </div>
         ) : (
           <div className="text-white">
-            {parseInt(NFTData) > 0 ? "GENERATE AGAIN" : "GENERATE NOW"}
+            {parseInt(NFTData) > 0 ? "CLAIM AGAIN" : "CLAIM NOW"}
           </div>
         )}
       </Button>
