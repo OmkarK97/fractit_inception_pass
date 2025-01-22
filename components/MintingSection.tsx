@@ -95,8 +95,8 @@ const MintingSection: React.FC = () => {
   const [instaShare, setInstaShare] = useState(false);
   const { client } = useAbstraxionSigningClient();
 
-  const XION_COST = 0.05;
-  const USDC_COST = 0.05;
+  const XION_COST = 0.5;
+  const USDC_COST = 2;
 
   const hasXionBalance = Number(xionBalance || 0) >= XION_COST;
   const hasUsdcBalance = Number(usdcBalance || 0) >= USDC_COST;
@@ -180,9 +180,9 @@ const MintingSection: React.FC = () => {
         },
         "",
         paymentOption === "XION"
-          ? coins("50000", "uxion")
+          ? coins(XION_COST * 1e6, "uxion")
           : coins(
-              "50000",
+              USDC_COST * 1e6,
               "ibc/57097251ED81A232CE3C9D899E7C8096D6D87EF84BA203E12E424AA4C9B57A64"
             )
       );
