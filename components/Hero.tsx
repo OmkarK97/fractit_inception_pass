@@ -57,7 +57,7 @@ const Hero: React.FC = () => {
                 You Own:{" "}
                 {Number(NFTData) <= 1 ? `${NFTData} PASS` : `${NFTData} PASSES`}
               </div>
-              <div className="text-base">{percentage}% Claimed</div>
+              <div className="text-base">{percentage.toFixed(3)}% Claimed</div>
             </div>
           </div>
         </div>
