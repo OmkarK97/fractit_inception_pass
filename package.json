@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@burnt-labs/abstraxion": "^1.0.0-alpha.52",
+    "@burnt-labs/abstraxion": "1.0.0-alpha.57",
     "@cosmjs/proto-signing": "^0.32.4",
     "@heroicons/react": "^2.1.5",
     "@particle-network/btc-connectkit": "^1.0.0-alpha.26",

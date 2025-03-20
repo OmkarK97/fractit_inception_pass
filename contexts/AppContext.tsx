@@ -33,8 +33,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const { client: signingClient } = useAbstraxionSigningClient();
   //const { xionBalance, usdcBalance } = useBalance();
 
-  const rpc = "https://rpc.xion-testnet-1.burnt.com:443";
-  const fixedNft = "xion1hy8w7mrvqt9nh8ps7an0r5mqm0dk6vqvfkuje5wwwkmv5hr9x4lqhlnzy6";
+  const rpc = "https://rpc.xion-testnet-2.burnt.com:443";
+  const fixedNft = "xion1h30469h4au9thlakd5j9yf0vn2cdcuwx3krhljrjvdgtjqcjuxvq6wvm5k";
 
   useEffect(() => {
     const initializeClient = async () => {

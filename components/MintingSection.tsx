@@ -111,9 +111,9 @@ const MintingSection: React.FC = () => {
   }, [hasXionBalance, hasUsdcBalance, paymentOption]);
 
   const fixedNft =
-    "xion1hy8w7mrvqt9nh8ps7an0r5mqm0dk6vqvfkuje5wwwkmv5hr9x4lqhlnzy6";
+    "xion1h30469h4au9thlakd5j9yf0vn2cdcuwx3krhljrjvdgtjqcjuxvq6wvm5k";
   const GRANTER_ADDRESS =
-    "xion1h82c0efsxxq4pgua754u6xepfu6avglup20fl834gc2ah0ptgn5s2zffe9";
+    "xion1a5s4fgc333jgl6423efww6egcw30pku3z9pulhm0tpjyuyu9xwkqnz8098";
 
   useEffect(() => {
     if (typeof window !== "undefined") {
