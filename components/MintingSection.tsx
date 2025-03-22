@@ -95,8 +95,8 @@ const MintingSection: React.FC = () => {
   const [instaShare, setInstaShare] = useState(false);
   const { client } = useAbstraxionSigningClient();
 
-  const XION_COST = 0.5;
-  const USDC_COST = 2;
+  const XION_COST = 0.01;
+  const USDC_COST = 0.01;
 
   const hasXionBalance = Number(xionBalance || 0) >= XION_COST;
   const hasUsdcBalance = Number(usdcBalance || 0) >= USDC_COST;
@@ -165,27 +165,32 @@ const MintingSection: React.FC = () => {
           denom:
             paymentOption === "XION"
               ? "uxion"
-              : "ibc/57097251ED81A232CE3C9D899E7C8096D6D87EF84BA203E12E424AA4C9B57A64",
+              : "ibc/6490A7EAB61059BFC1CDDEB05917DD70BDF3A611654162A1A47DB930D40D8AF4",
         },
       };
+
+      console.log(mintMsg, "mintMsg minting section");
 
       const deposit_response = await client.execute(
         account.bech32Address,
         fixedNft,
         mintMsg,
-        {
-          amount: [{ amount: "0", denom: "uxion" }],
-          gas: "500000",
-          granter: GRANTER_ADDRESS,
-        },
+        // {
+        //   amount: [{ amount: "500000", denom: "uxion" }],
+        //   gas: "600000",
+        //   granter: GRANTER_ADDRESS,
+        // },
+        "auto",
         "",
         paymentOption === "XION"
           ? coins(XION_COST * 1e6, "uxion")
           : coins(
               USDC_COST * 1e6,
-              "ibc/57097251ED81A232CE3C9D899E7C8096D6D87EF84BA203E12E424AA4C9B57A64"
+              "ibc/6490A7EAB61059BFC1CDDEB05917DD70BDF3A611654162A1A47DB930D40D8AF4"
             )
       );
+
+      console.log(deposit_response, "deposit_response minting section");
 
       setIsSuccess(true);
       setHash(deposit_response.transactionHash);

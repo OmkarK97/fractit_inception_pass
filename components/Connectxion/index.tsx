@@ -14,6 +14,8 @@ const ConnectWallet = () => {
   const [showAbstraxion, setShowAbstraxion] = useModal();
   const [isConnected, setIsConnected] = useState(false);
 
+  console.log(account, "account")
+
   useEffect(() => {
     if (account && account.bech32Address !== "") {
       setIsConnected(true);

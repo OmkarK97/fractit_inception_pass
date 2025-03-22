@@ -102,7 +102,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     if (signingClient && account) {
       try {
         const xionBalanceResponse = await signingClient.getBalance(account.bech32Address, "uxion");
-        const usdcBalanceResponse = await signingClient.getBalance(account.bech32Address, "ibc/57097251ED81A232CE3C9D899E7C8096D6D87EF84BA203E12E424AA4C9B57A64");
+        const usdcBalanceResponse = await signingClient.getBalance(account.bech32Address, "ibc/6490A7EAB61059BFC1CDDEB05917DD70BDF3A611654162A1A47DB930D40D8AF4");
         setXionBalance((parseInt(xionBalanceResponse.amount) / 1000000).toFixed(6));
         setUsdcBalance((parseInt(usdcBalanceResponse.amount) / 1000000).toFixed(6));
       } catch (error) {

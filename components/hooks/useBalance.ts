@@ -19,7 +19,7 @@ export function useBalance() {
         const { amount: xionAmount } = await client.getBalance(bech32Address, "uxion");
         const { amount: usdcAmount } = await client.getBalance(
           bech32Address,
-          "ibc/57097251ED81A232CE3C9D899E7C8096D6D87EF84BA203E12E424AA4C9B57A64"
+          "ibc/6490A7EAB61059BFC1CDDEB05917DD70BDF3A611654162A1A47DB930D40D8AF4"
         );
         setUSDCBalance(Number(usdcAmount) / 1e6);
         setXionBalance(Number(xionAmount) / 1e6);
